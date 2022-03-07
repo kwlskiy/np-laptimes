@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 // import logo from "./logo.svg"
 import './App.css';
-import {DropdownButton, Dropdown, Row, Col, Spinner} from 'react-bootstrap';
+import {DropdownButton, Dropdown, Row, Col, Spinner, Container} from 'react-bootstrap';
 
 class LambdaDemo extends Component {
 	constructor(props) {
@@ -65,7 +65,7 @@ class LambdaDemo extends Component {
 		return (
 			<>
 				{this.state.loading ?
-					<Spinner animation={'border'}/>
+					<Container> <span>Loading Lap Times... </span><Spinner animation={'border'}/></Container>
 					:
 					<>
 						<h1>
