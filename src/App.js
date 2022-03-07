@@ -10,7 +10,7 @@ class LambdaDemo extends Component {
 			loading: true,
 			initialTrackTimes: [],
 			trackTimes: [],
-			selectedClass: 'All',
+			selectedClass: 'S',
 			selectedTrack: 'BBD Breeze'
 		};
 	}
@@ -78,32 +78,29 @@ class LambdaDemo extends Component {
 							<Col>
 								<DropdownButton	id="dropdown-class-track" title={this.state.selectedTrack.toString()}>
 									{
-										[...new Set(this.state.initialTrackTimes.map(tt => tt.track))].map((track, i) =>
+										[...new Set(this.state.initialTrackTimes.map(tt => tt.track))].filter(e => e).map((track, i) =>
 											<Dropdown.Item key={'track' + i} style={{fontSize: "12px", maxHeight: "20px"}} onClick={e => this.handleTrackSelection(track)}>{track}</Dropdown.Item>
 										)
 									}
 								</DropdownButton>
 							</Col>
-						</Row>
-						<Row>
 							<Col>
 								Class:
 							</Col>
 							<Col>
 								<DropdownButton id="dropdown-class-class" title={this.state.selectedClass.toString()}>
 									{
-										[...new Set(this.state.initialTrackTimes.map(tt => tt.class))].map((trackClass, i) =>
+										[...new Set(this.state.initialTrackTimes.map(tt => tt.class))].filter(e => e).map((trackClass, i) =>
 											<Dropdown.Item key={'class' + i} onClick={e => this.handleClassSelection(trackClass)}>{trackClass}</Dropdown.Item>
 										)
 									}
 								</DropdownButton>
 							</Col>
-
 						</Row>
 						<table>
 							<tr>
-								<th>Track</th>
-								<th>Class</th>
+								{/*<th>Track</th>*/}
+								{/*<th>Class</th>*/}
 								<th>Rank</th>
 								<th>Alias</th>
 								<th>Vehicle</th>
@@ -114,8 +111,8 @@ class LambdaDemo extends Component {
 							{
 								this.state.trackTimes.map((tt, i) =>
 									<tr key={i}>
-										<td>{tt.track}</td>
-										<td>{tt.class}</td>
+										{/*<td>{tt.track}</td>*/}
+										{/*<td>{tt.class}</td>*/}
 										<td>{tt.rank}</td>
 										<td>{tt.alias}</td>
 										<td>{tt.vehicle}</td>
