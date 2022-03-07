@@ -177,7 +177,7 @@ class LambdaDemo extends Component {
 								<p style={{fontSize: "10px"}}>This data is put in manually, and may contain errors</p>
 								<p style={{fontSize: "10px"}}>Only A and S class times for now</p>
 								<p style={{fontSize: "10px"}}>To submit corrections and/or new data, contact one of the data maintainers</p>
-								<p style={{fontSize: "10px"}}>To submit feedback for the website or additions, please contact kwlski#5010 in discord</p>
+								<p style={{fontSize: "10px"}}>To submit feedback for the website or additions, please contact kwlski#5010 in Discord</p>
 							</Col>
 						</Row>
 					</>
