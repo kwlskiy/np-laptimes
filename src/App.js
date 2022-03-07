@@ -73,6 +73,20 @@ class LambdaDemo extends Component {
 						</h1>
 						<Row>
 							<Col>
+								Track:
+							</Col>
+							<Col>
+								<DropdownButton id="dropdown-class-track" title={this.state.selectedTrack.toString()}>
+									{
+										[...new Set(this.state.initialTrackTimes.map(tt => tt.track))].map((track, i) =>
+											<Dropdown.Item key={'track' + i} onClick={e => this.handleTrackSelection(track)}>{track}</Dropdown.Item>
+										)
+									}
+								</DropdownButton>
+							</Col>
+						</Row>
+						<Row>
+							<Col>
 								Class:
 							</Col>
 							<Col>
@@ -86,21 +100,6 @@ class LambdaDemo extends Component {
 							</Col>
 
 						</Row>
-						<Row>
-							<Col>
-								Track:
-							</Col>
-							<Col>
-								<DropdownButton id="dropdown-class-track" title={this.state.selectedTrack.toString()}>
-									{
-										[...new Set(this.state.initialTrackTimes.map(tt => tt.track))].map((track, i) =>
-											<Dropdown.Item key={'track' + i} onClick={e => this.handleTrackSelection(track)}>{track}</Dropdown.Item>
-										)
-									}
-								</DropdownButton>
-							</Col>
-						</Row>
-
 						<table>
 							<tr>
 								<th>Track</th>
