@@ -6,7 +6,7 @@ import axios from "axios"
 export async function handler(event, context) {
   try {
     // console.log(process.env.NETLIF_GS_KEY)
-    const response = await axios.get(`https://sheets.googleapis.com/v4/spreadsheets/${process.env.NETLIF_GS_ID}?ranges=Lap+Times!B3:H500&includeGridData=true&key=${process.env.NETLIF_GS_KEY}`, { headers: { Accept: "application/json" } })
+    const response = await axios.get(`https://sheets.googleapis.com/v4/spreadsheets/${process.env.NETLIF_GS_ID}?ranges=Lap+Times!B3:H1000&includeGridData=true&key=${process.env.NETLIF_GS_KEY}`, { headers: { Accept: "application/json" } })
     //const data = response.data
     console.log("arrived");
     const trackTimes = [];

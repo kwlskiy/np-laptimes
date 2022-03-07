@@ -79,7 +79,7 @@ class LambdaDemo extends Component {
 								<DropdownButton id="dropdown-class-track" title={this.state.selectedTrack.toString()}>
 									{
 										[...new Set(this.state.initialTrackTimes.map(tt => tt.track))].map((track, i) =>
-											<Dropdown.Item key={'track' + i} onClick={e => this.handleTrackSelection(track)}>{track}</Dropdown.Item>
+											<Dropdown.Item key={'track' + i} style={{fontSize: "10px"}} onClick={e => this.handleTrackSelection(track)}>{track}</Dropdown.Item>
 										)
 									}
 								</DropdownButton>
