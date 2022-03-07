@@ -5,7 +5,7 @@ import "./App.css"
 class LambdaDemo extends Component {
   constructor(props) {
     super(props)
-    this.state = { loading: false, msg: null }
+    this.state = { loading: false, trackTimes: [] }
   }
 
   handleClick = api => e => {
@@ -14,19 +14,45 @@ class LambdaDemo extends Component {
     this.setState({ loading: true })
     fetch("/.netlify/functions/" + api)
       .then(response => response.json())
-      .then(json => this.setState({ loading: false, msg: json.msg }))
+      .then(json => this.setState({ loading: false, trackTimes: json }))
   }
 
   render() {
     const { loading, msg } = this.state
 
     return (
-      <p>
-        <button onClick={this.handleClick("hello")}>{loading ? "Loading..." : "Call Lambda"}</button>
-        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading..." : "Call Async Lambda"}</button>
-        <br />
-        <span>{msg}</span>
-      </p>
+        <>
+          <p>
+            {/*<button onClick={this.handleClick("hello")}>{loading ? "Loading..." : "Call Lambda"}</button>*/}
+            <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading..." : "Load All Times"}</button>
+            <br />
+          </p>
+          <table>
+              <tr>
+                  <th>Track</th>
+                  <th>Class</th>
+                  <th>Rank</th>
+                  <th>Alias</th>
+                  <th>Vehicle</th>
+                  <th>Time</th>
+                  <th>Twitch</th>
+              </tr>
+            {
+              this.state.trackTimes.map((tt) =>
+                  <tr>
+                      <td>{tt.track}</td>
+                      <td>{tt.class}</td>
+                      <td>{tt.rank}</td>
+                      <td>{tt.alias}</td>
+                      <td>{tt.vehicle}</td>
+                      <td>{tt.time}</td>
+                      <td>{tt.twitch}</td>
+                  </tr>)
+            }
+          </table>
+
+        </>
+
     )
   }
 }
