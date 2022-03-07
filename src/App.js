@@ -117,7 +117,7 @@ class LambdaDemo extends Component {
 										<td>{tt.alias}</td>
 										<td>{tt.vehicle}</td>
 										<td>{tt.time}</td>
-										<td><a href={'https://twitch.com/' + tt.twitch}>{tt.twitch}</a></td>
+										<td>{tt.link ? <a href={tt.link}>{tt.linkname}</a> : <span>N/A</span>}</td>
 									</tr>)
 							}
 						</table>

@@ -14,6 +14,7 @@ export async function handler(event, context) {
     // console.log(response.data?.sheets?.[0]?.data?.[0]?.rowData);
     //print each row
     response.data?.sheets?.[0]?.data?.[0]?.rowData.forEach(e => {
+      console.log(e.values?.[6]?.hyperlink);
       trackTimes.push({
         track: e.values?.[0]?.formattedValue,
         class: e.values?.[1]?.formattedValue,
@@ -21,7 +22,8 @@ export async function handler(event, context) {
         alias: e.values?.[3]?.formattedValue,
         vehicle: e.values?.[4]?.formattedValue,
         time: e.values?.[5]?.formattedValue,
-        twitch: e.values?.[6]?.formattedValue,
+        linkname: e.values?.[6]?.formattedValue,
+        link: e.values?.[6]?.hyperlink,
       })
     });
 
