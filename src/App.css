@@ -17,7 +17,7 @@ th {
 
 th, td{
   padding: 15px;
-  min-width: 40px;
+  min-width: 50px;
 }
 
 .racerTh {
@@ -42,6 +42,15 @@ th, td{
   color: white;
 }
 
+.navBtn {
+  background-color: #303f6b;
+  color: white;
+}
+
+.navBtn:hover {
+  background-color: #303f6b;
+  color: white;
+}
 
 .dropdown-menu {
   max-height: 500px;
