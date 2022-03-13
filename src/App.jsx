@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import logo from "./logo.svg"
 import './App.css';
 import { Spinner, Container, Nav } from 'react-bootstrap';
@@ -56,6 +56,7 @@ function LapTimes() {
     // 	//calc who has most Top10 appearances
     // })
       .catch((err) => console.error(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //   handleClick = api => e => {

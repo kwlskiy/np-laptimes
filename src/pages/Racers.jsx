@@ -72,6 +72,7 @@ function Racers({lapTimes}) {
 
 
     setRacers({...racers, racerPositions: sortedPos});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lapTimes.initialTrackTimes, racers.sortByPos, racers.sortByPosDir, racers.sortByTotal]);
 
   function handleNumberSort(nr) {
