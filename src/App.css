@@ -1,5 +1,10 @@
+body {
+  background-color: #282c34;
+}
+
 .App {
   text-align: center;
+  background-color: #282c34;
 }
 
 td {
@@ -12,7 +17,31 @@ th {
 
 th, td{
   padding: 15px;
+  min-width: 40px;
 }
+
+.racerTh {
+  cursor: pointer;
+}
+
+.racerTh:hover {
+  color: #61dafb;
+}
+
+.racerThActive {
+  color: #61dafb;
+}
+
+.navHeader {
+  background-color: #303f6b;
+  color: white;
+}
+
+.navHeader:hover {
+  background-color: #303f6b;
+  color: white;
+}
+
 
 .dropdown-menu {
   max-height: 500px;
@@ -30,7 +59,8 @@ th, td{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /*justify-content: center;*/
+  padding-top: 50px;
   font-size: calc(10px + 2vmin);
   color: white;
 }
