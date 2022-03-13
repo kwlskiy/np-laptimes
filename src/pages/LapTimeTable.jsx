@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { DropdownButton, Dropdown, Row, Col, Spinner, Container, Nav } from 'react-bootstrap';
+import { DropdownButton, Dropdown, Row, Col, Spinner, } from 'react-bootstrap';
 
 function LapTimeTable({ lapTimes, setLapTimes }) {
   const [loading, setLoading] = useState(true);
@@ -65,7 +65,7 @@ function LapTimeTable({ lapTimes, setLapTimes }) {
                 <Dropdown.Item
                   key={`track${i}`}
                   style={{ fontSize: '12px', maxHeight: '20px' }}
-                  onClick={(e) => handleTrackSelection(track)}>
+                  onClick={() => handleTrackSelection(track)}>
                   {track}
                 </Dropdown.Item>
               ))
@@ -81,7 +81,7 @@ function LapTimeTable({ lapTimes, setLapTimes }) {
               [...new Set(lapTimes.initialTrackTimes.map((tt) => tt.class))]
                 .filter((e) => e)
                 .sort()
-                .map((trackClass, i) => <Dropdown.Item key={`class${i}`} onClick={(e) => handleClassSelection(trackClass)}>{trackClass}</Dropdown.Item>)
+                .map((trackClass, i) => <Dropdown.Item key={`class${i}`} onClick={() => handleClassSelection(trackClass)}>{trackClass}</Dropdown.Item>)
             }
           </DropdownButton>
         </Col>
