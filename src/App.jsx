@@ -95,7 +95,7 @@ function LapTimes() {
           <>
             <Nav className='navHeader' variant='pills' activeKey='1' onSelect={handleNav}>
               <Nav.Item >
-                <Nav.Link>
+                <Nav.Link as={Link} to='/'>
                   <span className='navHeader'>NoPixel WL Lap Times</span>
                 </Nav.Link>
               </Nav.Item>
@@ -105,11 +105,11 @@ function LapTimes() {
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item className={"navBtn"}>
-                <Nav.Link className='navHeader' title='Item' as={Link} to='/racers'>
+                <Nav.Link className='navHeader' as={Link} to='/racers'>
                   Racers
                 </Nav.Link>
               </Nav.Item>
-              <Nav.Item>
+              <Nav.Item className={"navBtn"}>
                 <Nav.Link className='navHeader' as={Link} to='/about'>
                   About
                 </Nav.Link>
