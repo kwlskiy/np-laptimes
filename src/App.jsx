@@ -94,7 +94,7 @@ function LapTimes() {
         :				(
           <>
             <Nav className='navHeader' variant='pills' activeKey='1' onSelect={handleNav}>
-              <Nav.Item >
+              <Nav.Item>
                 <Nav.Link>
                   <span className='navHeader'>NoPixel WL Lap Times</span>
                 </Nav.Link>
