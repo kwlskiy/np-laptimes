@@ -52,6 +52,29 @@ th, td{
   color: white;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/*table {*/
+/*  overflow-x: auto;*/
+/*  white-space: nowrap;*/
+/*}*/
+
+table {
+  /*overflow: scroll; !* Scrollbar are always visible *!*/
+  /*overflow: auto;   !* Scrollbar is displayed as it's needed *!*/
+  overflow: scroll;
+  /*display: block;*/
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background-color: #282c34;
+}
+
 .dropdown-menu {
   max-height: 500px;
   overflow-y: scroll;
@@ -63,7 +86,6 @@ th, td{
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
