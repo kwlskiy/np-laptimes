@@ -6,15 +6,15 @@ import axios from "axios"
 export async function handler(event, context) {
   try {
     // console.log(process.env.NETLIF_GS_KEY)
-    const response = await axios.get(`https://sheets.googleapis.com/v4/spreadsheets/${process.env.NETLIF_GS_ID}?ranges=Lap+Times!B3:H1400&includeGridData=true&key=${process.env.NETLIF_GS_KEY}`, { headers: { Accept: "application/json" } })
+    const response = await axios.get(`https://sheets.googleapis.com/v4/spreadsheets/${process.env.NETLIF_GS_ID}?ranges=Lap+Times!B3:H1200&includeGridData=true&key=${process.env.NETLIF_GS_KEY}`, { headers: { Accept: "application/json" } })
     //const data = response.data
-    console.log("arrived");
+    console.log("fetching laptimes...");
     const trackTimes = [];
     // console.log(process.env.NETLIF_GS_KEY);
     // console.log(response.data?.sheets?.[0]?.data?.[0]?.rowData);
     //print each row
     response.data?.sheets?.[0]?.data?.[0]?.rowData.forEach(e => {
-      console.log(e.values?.[6]?.hyperlink);
+      //console.log(e.values?.[6]?.hyperlink);
       trackTimes.push({
         track: e.values?.[0]?.formattedValue,
         class: e.values?.[1]?.formattedValue,
@@ -31,7 +31,7 @@ export async function handler(event, context) {
     //console.log(response.data?.sheets?.[0]?.data?.[0]?.rowData?.[0].values);
     //first cell first row/col
     //console.log(response.data?.sheets?.[0]?.data?.[0]?.rowData?.[0].values?.[0]?.formattedValue);
-    console.log(trackTimes?.[3]);
+    //console.log(trackTimes?.[3]);
     return {
       statusCode: 200,
       body: JSON.stringify(trackTimes)
