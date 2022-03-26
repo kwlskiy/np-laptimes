@@ -9,7 +9,7 @@ function About() {
       {/*</h1>*/}
 
       <Col>
-        <Row style={{fontSize: '28px', marginTop: '30px', }}>
+        <Row style={{fontSize: '28px', marginTop: '30px',}}>
           Remarks
         </Row>
         <Row style={{fontSize: '18px'}}>
@@ -24,15 +24,14 @@ function About() {
         <Row style={{fontSize: '18px'}}>
           - To submit feedback for the website or additions, please contact kwlski#5010 in Discord
         </Row>
-        <Row style={{fontSize: '28px', marginTop: '30px', }}/>
+        <Row style={{fontSize: '28px', marginTop: '30px',}}/>
         <Row style={{fontSize: '28px', marginBottom: '10px'}}>Data upkeep by</Row>
         {['DTalmer', 'Benjo411', 'Wuyah404', 'Sarah_Digitally', 'theVirtual', 'kwlski01'].map((p) => (
-          <Row style={{fontSize: '20px'}}>
-            {p}
+          <Row style={{fontSize: '20px', justifyItems: "start"}}>
+            {"- " + p}
           </Row>
         ))}
       </Col>
-
     </>
   );
 }
