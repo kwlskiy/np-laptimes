@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 // import logo from "./logo.svg"
 import './App.css';
-import {DropdownButton, Dropdown, Row, Col, Spinner, Container, Table} from 'react-bootstrap';
+import {DropdownButton, Dropdown, Row, Col, Spinner, Container} from 'react-bootstrap';
 
 class LambdaDemo extends Component {
   constructor(props) {
@@ -43,24 +43,6 @@ class LambdaDemo extends Component {
       });
 
   }
-
-  //   handleClick = api => e => {
-  //   e.preventDefault()
-  //
-  //   this.setState({ loading: true })
-  //   fetch("/.netlify/functions/" + api)
-  //     .then(response => response.json())
-  //     .then(json => this.setState({ loading: false, trackTimes: json }))
-  // }
-
-  // handleShow = api => e => {
-  // 	e.preventDefault();
-  //
-  // 	//this.setState({ loading: true })
-  // 	fetch('/.netlify/functions/' + api)
-  // 		.then(response => response.json())
-  // 		.then(json => this.setState({loading: false, trackTimes: json}));
-  // };
 
   handleClassSelection = trackClass => {
     //this.setState({ loading: true })
