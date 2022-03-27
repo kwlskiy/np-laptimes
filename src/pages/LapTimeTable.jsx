@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { DropdownButton, Dropdown, Row, Col, Spinner, } from 'react-bootstrap';
+import React, {useEffect, useState} from 'react';
+import {DropdownButton, Dropdown, Row, Col, Spinner, Container,} from 'react-bootstrap';
 
-function LapTimeTable({ lapTimes, setLapTimes }) {
+function LapTimeTable({lapTimes, setLapTimes}) {
   const [loading, setLoading] = useState(true);
   const [init, setInit] = useState(false);
 
@@ -50,49 +50,62 @@ function LapTimeTable({ lapTimes, setLapTimes }) {
   }, [lapTimes]);
 
   return (
-    <>
+    <Container>
       {/* <h1> */}
       {/* NoPixel WL Lap Times */}
       {/* </h1> */}
       <Row>
         <Col>
-          Track:
-        </Col>
-        <Col>
-          <DropdownButton id='dropdown-class-track' title={lapTimes.selectedTrack.toString()}>
-            {
-              [...new Set(lapTimes.initialTrackTimes.map((tt) => tt.track))].filter((e) => e).sort().map((track, i) => (
-                <Dropdown.Item
-                  key={`track${i}`}
-                  style={{ fontSize: '12px', maxHeight: '20px' }}
-                  onClick={() => handleTrackSelection(track)}>
-                  {track}
-                </Dropdown.Item>
-              ))
-            }
-          </DropdownButton>
-        </Col>
-        <Col>
-          Class:
-        </Col>
-        <Col>
-          <DropdownButton id='dropdown-class-class' title={lapTimes.selectedClass.toString()}>
-            {
-              [...new Set(lapTimes.initialTrackTimes.map((tt) => tt.class))]
-                .filter((e) => e)
-                .sort()
-                .map((trackClass, i) => <Dropdown.Item key={`class${i}`} onClick={() => handleClassSelection(trackClass)}>{trackClass}</Dropdown.Item>)
-            }
-          </DropdownButton>
+          <Row>
+            <Col md={{span: 1, offset: 0}} style={{
+              display: "flex",
+              alignItems: "center",
+              fontSize: "20px"
+            }}>
+              <span>Track:</span>
+            </Col>
+            <Col md={{span: 3, offset: 0}}>
+              <DropdownButton id="dropdown-class-track" title={lapTimes.selectedTrack.toString()}>
+                {
+                  [...new Set(lapTimes.initialTrackTimes.map((tt) => tt.track))].filter((e) => e).sort().map((track, i) => (
+                    <Dropdown.Item
+                      key={`track${i}`}
+                      style={{fontSize: '12px', maxHeight: '20px'}}
+                      onClick={() => handleTrackSelection(track)}>
+                      {track}
+                    </Dropdown.Item>
+                  ))
+                }
+              </DropdownButton>
+            </Col>
+            <Col md={{span: 1, offset: 0}} style={{
+              display: "flex",
+              alignItems: "center",
+              fontSize: "20px"
+            }}>
+              <span>Class:</span>
+            </Col>
+            <Col md={{span: 3, offset: 0}}>
+              <DropdownButton id="dropdown-class-class" title={lapTimes.selectedClass.toString()}>
+                {
+                  [...new Set(lapTimes.initialTrackTimes.map((tt) => tt.class))]
+                    .filter((e) => e)
+                    .sort()
+                    .map((trackClass, i) => <Dropdown.Item key={`class${i}`} onClick={() => handleClassSelection(trackClass)}>{trackClass}</Dropdown.Item>)
+                }
+              </DropdownButton>
+            </Col>
+          </Row>
         </Col>
       </Row>
 
-      {
-        loading
-          ? <Spinner style={{ marginTop: '50px' }} animation='border'> Loading... </Spinner>
-          : (
-            <table>
-              <tbody>
+      <Row>
+        {
+          loading
+            ? <Spinner style={{marginTop: '50px'}} animation="border"> Loading... </Spinner>
+            : (
+              <table>
+                <tbody>
                 <tr>
                   {/* <th>Track</th> */}
                   {/* <th>Class</th> */}
@@ -104,23 +117,25 @@ function LapTimeTable({ lapTimes, setLapTimes }) {
                 </tr>
 
                 {
-                    lapTimes.trackTimes.map((tt, i) => (
-                      <tr key={i}>
-                        {/* <td>{tt.track}</td> */}
-                        {/* <td>{tt.class}</td> */}
-                        <td>{tt.rank}</td>
-                        <td>{tt.alias}</td>
-                        <td>{tt.vehicle}</td>
-                        <td>{tt.time}</td>
-                        <td>{tt.link ? <a href={tt.link}>{tt.linkname}</a> : <span>N/A</span>}</td>
-                      </tr>
-                    ))
-                  }
-              </tbody>
-            </table>
-          )
-      }
-    </>
+                  lapTimes.trackTimes.map((tt, i) => (
+                    <tr key={i}>
+                      {/* <td>{tt.track}</td> */}
+                      {/* <td>{tt.class}</td> */}
+                      <td>{tt.rank}</td>
+                      <td>{tt.alias}</td>
+                      <td>{tt.vehicle}</td>
+                      <td>{tt.time}</td>
+                      <td>{tt.link ? <a href={tt.link}>{tt.linkname}</a> : <span>N/A</span>}</td>
+                    </tr>
+                  ))
+                }
+                </tbody>
+              </table>
+            )
+        }
+      </Row>
+
+    </Container>
   );
 }
 

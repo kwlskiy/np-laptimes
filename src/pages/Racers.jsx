@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {AiFillCaretDown, AiFillCaretUp, AiOutlineInfoCircle} from 'react-icons/ai';
-import {OverlayTrigger, Popover, Row, Tooltip} from 'react-bootstrap';
+import {Col, OverlayTrigger, Popover, Row, Tooltip} from 'react-bootstrap';
 
 function Racers({lapTimes}) {
   const [racers, setRacers] = useState({
@@ -89,7 +89,7 @@ function Racers({lapTimes}) {
   }
 
   return (
-    <>
+    <Col>
       <Row>
         <h2>
           Racers Leaderboard Placements<span> </span>
@@ -97,7 +97,7 @@ function Racers({lapTimes}) {
             key={'rTT'}
             placement="bottom"
             overlay={
-             <Popover id={`popover-positioned-1`}>
+              <Popover id={`popover-positioned-1`}>
                 <Popover.Header as="h2">
                   Top10 Placements
                 </Popover.Header>
@@ -115,68 +115,75 @@ function Racers({lapTimes}) {
         </h2>
 
       </Row>
+      <Row>
+        <table>
+          <thead>
+          <tr>
+            {/* <th>Rank</th> */}
+            <th>{racers.mode}</th>
+            {[...new Array(10)].map((el, i) => {
+              return (
+                <th
+                  className={`racerTh ${racers.sortByPos === (i + 1).toString() && !racers.sortByTotal ? 'racerThActive' : ''}`}
+                  onClick={() => handleNumberSort((i + 1).toString())}>
+                  #
+                  {i + 1}
+                  {' '}
+                  {racers.sortByPos === (i + 1).toString() && !racers.sortByTotal && (racers.sortByPosDir === 'desc' ? <AiFillCaretDown/> : <AiFillCaretUp/>)}
+                </th>
+              );
+            })}
+            <th
+              className={`racerTh ${racers.sortByTotal ? 'racerThActive' : ''}`}
+              onClick={() => handleTotalSort()}>
+              Total
+              {racers.sortByTotal && (racers.sortByPosDir === 'desc' ? <AiFillCaretDown/> : <AiFillCaretUp/>)}
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          {
+            racers.racerPositions.slice(0, 100).map((tt, i) => (
+              <tr key={i}>
+                {/* <td>{tt.track}</td> */}
+                {/* <td>{tt.class}</td> */}
+                {/* <td>{i + 1}</td> */}
+                {/* <td>{tt.linkname}</td> */}
+                <td>
+                  {
+                    tt.link
+                      ? <>
+                        <OverlayTrigger
+                          key={'leftTT' + i}
+                          placement="left"
+                          overlay={
+                            <Tooltip id={`tooltip-leftTT${i}`}>
+                              <span>Used Aliases:</span><br/>
+                              {tt.aliases.map((al) => <><strong>{al}</strong><br/></>)}
+                            </Tooltip>
+                          }>
+                          <span><AiOutlineInfoCircle/></span>
+                        </OverlayTrigger>
+                        <span>  </span>
+                        <a href={tt.link}>{tt.linkname}</a>
+                      </>
+                      : <span>{tt.linkname}</span>
+                  }
+                </td>
+                {[...new Array(10)].map((el, index) => <td>{tt[`amount${index + 1}`]}</td>)}
+                <td>{tt.totalAmount}</td>
+                {/* <td>{tt.amount1}</td> */}
+                {/* <td>{tt.time}</td> */}
+                {/* <td>{tt.time.link ? <a href={tt.time.link}>{tt.time.linkname}</a> : <span>N/A</span>}</td> */}
+              </tr>
+            ))
+          }
+          </tbody>
 
-      <table border="1" frame="void" rules="rows">
-        <tr>
-          {/* <th>Rank</th> */}
-          <th>{racers.mode}</th>
-          {[...new Array(10)].map((el, i) => {
-            return (
-              <th
-                className={`racerTh ${racers.sortByPos === (i + 1).toString() && !racers.sortByTotal ? 'racerThActive' : ''}`}
-                onClick={() => handleNumberSort((i + 1).toString())}>
-                #
-                {i + 1}
-                {' '}
-                {racers.sortByPos === (i + 1).toString() && !racers.sortByTotal && (racers.sortByPosDir === 'desc' ? <AiFillCaretDown/> : <AiFillCaretUp/>)}
-              </th>
-            );
-          })}
-          <th
-            className={`racerTh ${racers.sortByTotal ? 'racerThActive' : ''}`}
-            onClick={() => handleTotalSort()}>
-            Total
-            {racers.sortByTotal && (racers.sortByPosDir === 'desc' ? <AiFillCaretDown/> : <AiFillCaretUp/>)}
-          </th>
-        </tr>
-        {
-          racers.racerPositions.slice(0, 100).map((tt, i) => (
-            <tr key={i}>
-              {/* <td>{tt.track}</td> */}
-              {/* <td>{tt.class}</td> */}
-              {/* <td>{i + 1}</td> */}
-              {/* <td>{tt.linkname}</td> */}
-              <td>
-                {
-                  tt.link
-                    ? <>
-                      <OverlayTrigger
-                        key={'leftTT' + i}
-                        placement="left"
-                        overlay={
-                          <Tooltip id={`tooltip-leftTT${i}`}>
-                            <span>Used Aliases:</span><br/>
-                            {tt.aliases.map((al) => <><strong>{al}</strong><br/></>)}
-                          </Tooltip>
-                        }>
-                        <span><AiOutlineInfoCircle/></span>
-                      </OverlayTrigger>
-                      <span>  </span>
-                      <a href={tt.link}>{tt.linkname}</a>
-                    </>
-                    : <span>{tt.linkname}</span>
-                }
-              </td>
-              {[...new Array(10)].map((el, index) => <td>{tt[`amount${index + 1}`]}</td>)}
-              <td>{tt.totalAmount}</td>
-              {/* <td>{tt.amount1}</td> */}
-              {/* <td>{tt.time}</td> */}
-              {/* <td>{tt.time.link ? <a href={tt.time.link}>{tt.time.linkname}</a> : <span>N/A</span>}</td> */}
-            </tr>
-          ))
-        }
-      </table>
-    </>
+        </table>
+      </Row>
+
+    </Col>
   );
 }
 

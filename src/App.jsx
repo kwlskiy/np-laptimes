@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 // import logo from "./logo.svg"
 import './App.css';
-import { Spinner, Container, Nav } from 'react-bootstrap';
-import { BrowserRouter as Router,
+import {Spinner, Container, Nav,} from 'react-bootstrap';
+import {
+  BrowserRouter as Router,
   Route,
   Routes,
-  Link } from 'react-router-dom';
+  Link
+} from 'react-router-dom';
 import Racers from './pages/Racers.jsx';
 import About from './pages/About.jsx';
 import LapTimeTable from './pages/LapTimeTable.jsx';
@@ -22,13 +24,11 @@ function LapTimes() {
 
   useEffect(() => {
     console.log('RUN');
-    setLapTimes({ ...lapTimes, loading: true });
-
-    // setTimeout(() => setLapTimes({...lapTimes, loading: false}), 1000);
+    setLapTimes({...lapTimes, loading: true});
 
     fetch('/.netlify/functions/laptimes')
       .then((response) => response.json())
-      .then((json) => setLapTimes((lt) => ({ ...lt, initialTrackTimes: json })))
+      .then((json) => setLapTimes((lt) => ({...lt, initialTrackTimes: json})))
       .then(() => {
         setLapTimes((lt) => ({
           ...lt,
@@ -37,45 +37,10 @@ function LapTimes() {
         }));
       })
 
-    // .then(() => {
-    // 	//calc who has most LRs
-    // 	const lrTimes = [];
-    //
-    // 	for (const lrTime of lapTimes.initialTrackTimes.filter((tt) => tt.rank === '1')) {
-    // 		const lrFoundIndex = lrTimes.findIndex(lr => lr.time.alias === lrTime.alias);
-    // 		if (lrFoundIndex === -1) {
-    // 			lrTimes.push({
-    // 				time: lrTime,
-    // 				amount: 1,
-    // 			});
-    // 		} else {
-    // 			lrTimes[lrFoundIndex].amount++;
-    // 		}
-    // 	}
-    // 	setLapTimes({...lapTimes, racerPositions: lrTimes.filter(el => el.time.alias).sort((a, b) => b.amount - a.amount)});
-    // 	//calc who has most Top10 appearances
-    // })
+
       .catch((err) => console.error(err));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  //   handleClick = api => e => {
-  //   e.preventDefault()
-  //
-  //   setState({ loading: true })
-  //   fetch("/.netlify/functions/" + api)
-  //     .then(response => response.json())
-  //     .then(json => setState({ loading: false, trackTimes: json }))
-  // }
-
-  // handleShow = api => e => {
-  // 	e.preventDefault();
-  //
-  // 	//setState({ loading: true })
-  // 	fetch('/.netlify/functions/' + api)
-  // 		.then(response => response.json())
-  // 		.then(json => setState({loading: false, trackTimes: json}));
-  // };
 
   function handleNav(eventKey) {
     console.log(eventKey);
@@ -85,57 +50,55 @@ function LapTimes() {
     <>
       {lapTimes.loading
         ? (
-          <Container className='App-header'>
+          <Container className="App-header">
             {' '}
             <span>Loading Lap Times... </span>
-            <Spinner animation='border' />
+            <Spinner animation="border"/>
           </Container>
         )
-        :				(
+        : (
           <>
-            <Nav className='navHeader' variant='pills' activeKey='1' onSelect={handleNav}>
+            <Nav className="navHeader" variant="pills" activeKey="1" onSelect={handleNav}>
               <Nav.Item>
-                <Nav.Link>
-                  <span className='navHeader'>NoPixel WL Lap Times</span>
+                <Nav.Link as={Link} to="/">
+                  <span className="navHeader">NoPixel WL Lap Times</span>
                 </Nav.Link>
               </Nav.Item>
-              <Nav.Item style={{ marginLeft: '50px' }} className={"navBtn"}>
-                <Nav.Link className='navHeader' as={Link} to='/'>
+              <Nav.Item style={{marginLeft: '50px'}} className={'navBtn'}>
+                <Nav.Link className="navHeader" as={Link} to="/">
                   Lap Times
                 </Nav.Link>
               </Nav.Item>
-              <Nav.Item className={"navBtn"}>
-                <Nav.Link className='navHeader' title='Item' as={Link} to='/racers'>
+              <Nav.Item className={'navBtn'}>
+                <Nav.Link className="navHeader" title="Item" as={Link} to="/racers">
                   Racers
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link className='navHeader' as={Link} to='/about'>
+                <Nav.Link className="navHeader" as={Link} to="/about">
                   About
                 </Nav.Link>
               </Nav.Item>
             </Nav>
-
-            <div className='App-header'>
+            <Container className="main-content" md={{ span: 6, offset: 3 }} style={{ padding: "20px"}}>
               <Routes>
                 <Route
-                  path='/'
+                  path="/"
                   element={(
                     <LapTimeTable
-                    lapTimes={lapTimes}
-                    setLapTimes={setLapTimes} />
-)} />
+                      lapTimes={lapTimes}
+                      setLapTimes={setLapTimes}/>
+                  )}/>
                 <Route
-                  path='/racers'
+                  path="/racers"
                   element={(
                     <Racers
-                    lapTimes={lapTimes}
-                    setLapTimes={setLapTimes} />
-)} />
-                <Route path='/about' element={<About />} />
+                      lapTimes={lapTimes}
+                      setLapTimes={setLapTimes}/>
+                  )}/>
+                <Route path="/about" element={<About/>}/>
               </Routes>
-
-            </div>
+            </Container>
           </>
         )}
     </>
@@ -275,12 +238,7 @@ function LapTimes() {
 function App() {
   return (
     <Router>
-      <div className='App'>
-        <header>
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
-          <LapTimes />
-        </header>
-      </div>
+        <LapTimes/>
     </Router>
   );
 }

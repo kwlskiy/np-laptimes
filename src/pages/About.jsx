@@ -7,7 +7,6 @@ function About() {
       {/*<h1>*/}
       {/*  About*/}
       {/*</h1>*/}
-
       <Col>
         <Row style={{fontSize: '28px', marginTop: '30px',}}>
           Remarks
