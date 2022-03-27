@@ -110,7 +110,7 @@ function Racers({lapTimes}) {
                   <br/><br/>
                   <span>If there is more than one alias recorded per track, the better time will be taken.</span>
                   <br/><br/>
-                  <span>At the moment deleted tracks will be taken into account.</span>
+                  <span>At the moment removed tracks will be taken into account.</span>
                 </Popover.Body>
               </Popover>
             }>
