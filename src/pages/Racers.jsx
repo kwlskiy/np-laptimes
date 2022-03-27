@@ -14,7 +14,6 @@ function Racers({lapTimes}) {
   useEffect(() => {
     // calc who has most LRs
     const racerPositions = [];
-    //console.log(lapTimes.initialTrackTimes);
 
     const sanitizedLapTimes = lapTimes.initialTrackTimes.filter((tt) => tt.alias).map((lt) => {
       if (lt.linkname === '#N/A') {
@@ -34,7 +33,6 @@ function Racers({lapTimes}) {
         dedupedLapTimes.push(lt);
       }
     }
-    //console.log(dedupedLapTimes.filter((tt) => tt.linkname === 'Sarah_Digitally'));
 
     for (const lrTime of dedupedLapTimes) {
       // console.log(lrTime)
@@ -58,8 +56,6 @@ function Racers({lapTimes}) {
       }
     }
 
-    //console.log(racers.sortByPosDir);
-    // console.log(racerPositions);
     let sortedPos;
 
     if (!racers.sortByTotal) {
