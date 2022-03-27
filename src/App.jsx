@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 // import logo from "./logo.svg"
 import './App.css';
-import {Spinner, Container, Nav,} from 'react-bootstrap';
+import {Spinner, Container, Nav, Row, Col,} from 'react-bootstrap';
 import {
   BrowserRouter as Router,
   Route,
@@ -50,10 +50,23 @@ function LapTimes() {
     <>
       {lapTimes.loading
         ? (
-          <Container fluid className="App-header" style={{display: 'flex', justifyContent: "center", alignItems: "center", height: "100%"}}>
-            {' '}
-            <span>Loading Lap Times... </span>
-            <Spinner animation="border"/>
+          <Container fluid className="App-header" style={{
+            display: 'flex',
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            color: "white",
+            width: "100%",
+            fontSize: "20pt"
+          }}>
+            <Row style={{minWidth: "600px"}}>
+              <Col>
+                <span>Loading Lap Times... </span>
+              </Col>
+              <Col>
+                <Spinner animation="border" style={{marginLeft: "20px"}}/>
+              </Col>
+            </Row>
           </Container>
         )
         : (
