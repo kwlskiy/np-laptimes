@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {AiFillCaretDown, AiFillCaretUp, AiOutlineInfoCircle} from 'react-icons/ai';
-import {OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {OverlayTrigger, Popover, Row, Tooltip} from 'react-bootstrap';
 
 function Racers({lapTimes}) {
   const [racers, setRacers] = useState({
@@ -8,7 +8,7 @@ function Racers({lapTimes}) {
     mode: 'Racer', // can be "Racer" or "Alias"
     sortByPos: '1',
     sortByPosDir: 'desc',
-    sortByTotal: false
+    sortByTotal: true
   });
 
   useEffect(() => {
@@ -62,7 +62,7 @@ function Racers({lapTimes}) {
     // console.log(racerPositions);
     let sortedPos;
 
-    if(!racers.sortByTotal){
+    if (!racers.sortByTotal) {
       sortedPos = racerPositions.sort((a, b) => (racers.sortByPosDir === 'desc'
         ? b[`amount${racers.sortByPos}`] - a[`amount${racers.sortByPos}`]
         : a[`amount${racers.sortByPos}`] - b[`amount${racers.sortByPos}`]));
@@ -94,9 +94,32 @@ function Racers({lapTimes}) {
 
   return (
     <>
-      <h2>
-        Racers Leaderboard Placements
-      </h2>
+      <Row>
+        <h2>
+          Racers Leaderboard Placements<span> </span>
+          <OverlayTrigger
+            key={'rTT'}
+            placement="bottom"
+            overlay={
+             <Popover id={`popover-positioned-1`}>
+                <Popover.Header as="h2">
+                  Top10 Placements
+                </Popover.Header>
+                <Popover.Body>
+                  <span>Amount of placements in the top10 per track.</span>
+                  <br/><br/>
+                  <span>If there is more than one alias recorded per track, the better time will be taken.</span>
+                  <br/><br/>
+                  <span>At the moment deleted tracks will be taken into account.</span>
+                </Popover.Body>
+              </Popover>
+            }>
+            <span><AiOutlineInfoCircle/></span>
+          </OverlayTrigger>
+        </h2>
+
+      </Row>
+
       <table border="1" frame="void" rules="rows">
         <tr>
           {/* <th>Rank</th> */}
@@ -109,7 +132,7 @@ function Racers({lapTimes}) {
                 #
                 {i + 1}
                 {' '}
-                {racers.sortByPos === (i + 1).toString() && !racers.sortByTotal  && (racers.sortByPosDir === 'desc' ? <AiFillCaretDown/> : <AiFillCaretUp/>)}
+                {racers.sortByPos === (i + 1).toString() && !racers.sortByTotal && (racers.sortByPosDir === 'desc' ? <AiFillCaretDown/> : <AiFillCaretUp/>)}
               </th>
             );
           })}
@@ -117,7 +140,7 @@ function Racers({lapTimes}) {
             className={`racerTh ${racers.sortByTotal ? 'racerThActive' : ''}`}
             onClick={() => handleTotalSort()}>
             Total
-            {racers.sortByTotal  && (racers.sortByPosDir === 'desc' ? <AiFillCaretDown/> : <AiFillCaretUp/>)}
+            {racers.sortByTotal && (racers.sortByPosDir === 'desc' ? <AiFillCaretDown/> : <AiFillCaretUp/>)}
           </th>
         </tr>
         {
@@ -133,7 +156,7 @@ function Racers({lapTimes}) {
                     ? <>
                       <OverlayTrigger
                         key={'leftTT' + i}
-                        placement='left'
+                        placement="left"
                         overlay={
                           <Tooltip id={`tooltip-leftTT${i}`}>
                             <span>Used Aliases:</span><br/>
