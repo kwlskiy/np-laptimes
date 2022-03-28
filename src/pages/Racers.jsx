@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {AiFillCaretDown, AiFillCaretUp, AiOutlineInfoCircle} from 'react-icons/ai';
-import {Col, OverlayTrigger, Popover, Row, Tooltip} from 'react-bootstrap';
+import {Col, OverlayTrigger, Popover, Row, Tooltip, Form, DropdownButton, Dropdown} from 'react-bootstrap';
 
 function Racers({lapTimes}) {
   const [racers, setRacers] = useState({
@@ -8,20 +8,33 @@ function Racers({lapTimes}) {
     mode: 'Racer', // can be "Racer" or "Alias"
     sortByPos: '1',
     sortByPosDir: 'desc',
-    sortByTotal: true
+    sortByTotal: true,
+    filterByDeleted: false,
+    filterByClass: "A+S"
   });
 
   useEffect(() => {
     // calc who has most LRs
     const racerPositions = [];
 
-    const sanitizedLapTimes = lapTimes.initialTrackTimes.filter((tt) => tt.alias).map((lt) => {
+    let sanitizedLapTimes = lapTimes.initialTrackTimes.filter((tt) => tt.alias).map((lt) => {
       if (lt.linkname === '#N/A') {
         // console.log("mapping to " + lt.alias);
         lt.linkname = lt.alias;
       }
       return lt;
     });
+
+    //filter removed tracks if wanted
+    if(!racers.filterByDeleted) {
+      sanitizedLapTimes = sanitizedLapTimes.filter((tt) => !tt.track.toLowerCase().includes("(removed)"))
+    }
+
+    //filter class
+    if(racers.filterByClass !== "A+S"){
+      sanitizedLapTimes = sanitizedLapTimes.filter((tt) => tt.class.toLowerCase().trim() === racers.filterByClass.toLowerCase().toLowerCase().trim());
+    }
+
 
     const dedupedLapTimes = [];
 
@@ -69,7 +82,7 @@ function Racers({lapTimes}) {
 
     setRacers({...racers, racerPositions: sortedPos});
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lapTimes.initialTrackTimes, racers.sortByPos, racers.sortByPosDir, racers.sortByTotal]);
+  }, [lapTimes.initialTrackTimes, racers.sortByPos, racers.sortByPosDir, racers.sortByTotal, racers.filterByDeleted, racers.filterByClass]);
 
   function handleNumberSort(nr) {
     setRacers((rcrs) => ({
@@ -91,29 +104,62 @@ function Racers({lapTimes}) {
   return (
     <Col>
       <Row>
-        <h2>
-          Racers Leaderboard Placements<span> </span>
-          <OverlayTrigger
-            key={'rTT'}
-            placement="bottom"
-            overlay={
-              <Popover id={`popover-positioned-1`}>
-                <Popover.Header as="h2">
-                  Top10 Placements
-                </Popover.Header>
-                <Popover.Body>
-                  <span>Amount of placements in the top10 per track.</span>
-                  <br/><br/>
-                  <span>If there is more than one alias recorded per track, the better time will be taken.</span>
-                  <br/><br/>
-                  <span>At the moment removed tracks will be taken into account.</span>
-                </Popover.Body>
-              </Popover>
-            }>
-            <span><AiOutlineInfoCircle/></span>
-          </OverlayTrigger>
-        </h2>
-
+        <Col>
+          <h2>
+            Racers Leaderboard Placements<span> </span>
+            <OverlayTrigger
+              key={'rTT'}
+              placement="bottom"
+              overlay={
+                <Popover id={`popover-positioned-1`}>
+                  <Popover.Header as="h2">
+                    Top10 Placements
+                  </Popover.Header>
+                  <Popover.Body>
+                    <span>Amount of placements in the top10 per track.</span>
+                    <br/><br/>
+                    <span>If there is more than one alias recorded per track, the better time will be taken.</span>
+                    <br/><br/>
+                    <span>At the moment removed tracks will be taken into account.</span>
+                  </Popover.Body>
+                </Popover>
+              }>
+              <span><AiOutlineInfoCircle/></span>
+            </OverlayTrigger>
+          </h2>
+        </Col>
+        <Col  md={{span: 4, offset: 0}} style={{
+          display: "flex",
+          alignItems: "center",
+          fontSize: "20px",
+        }}>
+          <Form.Check
+            inline
+            label="Include removed tracks"
+            name="group1"
+            type={"switch"}
+            onChange={(e) => setRacers({...racers, filterByDeleted: e.target.checked})}
+            id={`filterByRemoved`} />
+        </Col>
+        <Col md={{span: 1, offset: 0}} style={{
+          display: "flex",
+          alignItems: "center",
+          fontSize: "20px"
+        }}>
+          <span>Class:</span>
+        </Col>
+        <Col  md={{span: 2, offset: 0}} style={{
+          display: "flex",
+          alignItems: "center",
+          fontSize: "20px"
+        }}>
+          <DropdownButton id="dropdown-class-class" title={racers.filterByClass}>
+            {
+              ["A+S", "A", "S"]
+                .map((trackClass, i) => <Dropdown.Item key={`classR${i}`} onClick={() => setRacers({...racers, filterByClass: trackClass})}>{trackClass}</Dropdown.Item>)
+            }
+          </DropdownButton>
+        </Col>
       </Row>
       <Row>
         <table>

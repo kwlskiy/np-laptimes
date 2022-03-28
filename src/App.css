@@ -29,6 +29,12 @@ tbody {
   height: 100%;
 }
 
+#filterByRemoved {
+  display: flex;
+  alignItems: center;
+  fontSize: 20px;
+  cursor: pointer;
+}
 .racerTh {
   cursor: pointer;
 }
