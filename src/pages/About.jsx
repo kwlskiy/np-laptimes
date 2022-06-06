@@ -25,7 +25,8 @@ function About() {
         </Row>
         <Row style={{fontSize: '28px', marginTop: '30px',}}/>
         <Row style={{fontSize: '28px', marginBottom: '10px'}}>Data upkeep by</Row>
-        {['DTalmer', 'Benjo411', 'Wuyah404', 'Sarah_Digitally', 'theVirtual', 'kwlski01'].map((p) => (
+        {['DTalmer', 'Benjo411, Discord: Benjo 🌈#0044',
+          'Wuyah404, Discord: ( •ᴗ•)#0205', 'Sarah_Digitally', 'theVirtual', 'kwlski01, Discord: kwlski#5010'].map((p) => (
           <Row style={{fontSize: '20px', justifyItems: "start"}}>
             {"- " + p}
           </Row>
